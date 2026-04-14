@@ -1,0 +1,64 @@
+.reveal {
+  font-size: 28px;
+}
+
+.reveal h1 { font-size: 2em; font-weight: bold; }
+.reveal h2 { font-size: 1.5em; font-weight: bold; }
+
+.reveal .slides section {
+  line-height: 1.2;
+}
+
+.reveal li {
+  margin-bottom: 0.3em;
+}
+
+/* Background */
+.reveal {
+  background-color: #0f1020;
+  color: #f0eee9;
+}
+
+/* Headings */
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: #f0eee9;
+}
+
+/* Links (optional accent) */
+.reveal a {
+  color: #8aa2ff;
+}
+
+/* Slightly softer secondary text */
+.reveal p,
+.reveal li {
+  color: #f0eee9;
+}
+
+/* Improve readability */
+.reveal .slides section {
+  line-height: 1.2;
+}
+
+/* Optional: subtle slide background gradient */
+.reveal {
+  background: linear-gradient(180deg, #0f1020 0%, #141612 100%);
+}
+
+.reveal::after {
+  content: "";
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 220px;
+  height: 100px;
+  background-image: url("images/logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+  filter: brightness(0) invert(1);
+}
+

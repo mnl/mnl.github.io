@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Mikael Nimell">
+  <title>Config Management Camp 2026 recap</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Config Management Camp 2026 recap</h1>
+  <p class="author">Mikael Nimell</p>
+  <p class="date">April 2026</p>
+</section>
+
+<section id="immutable-linux" class="slide level1">
+<h1>Immutable Linux</h1>
+<h2 id="from-flatcar-to-kairos">From Flatcar to Kairos</h2>
+<p>2026 recap</p>
+<p><img data-src="images/cfgmgmtcamp.png" /></p>
+<aside class="notes">
+<p>Quick intro. Mention you’ve been to the conference multiple times.
+Others cover general talks — you focus on one lab and a theme.</p>
+</aside>
+</section>
+<section id="last-day-workshops" class="slide level1">
+<h1>2026: Last day: Workshops</h1>
+<h2 id="from-zero-to-immutable-kubernetes">From Zero to Immutable
+Kubernetes</h2>
+<p><a
+href="https://cfp.cfgmgmtcamp.org/ghent2026/talk/W9LUC3/"><em>Mauro
+Morales and Dimitris Karakasilis</em></a></p>
+<ul>
+<li>Built a cluster from scratch</li>
+<li>Nodes provisioned as images</li>
+<li>No manual configuration steps</li>
+</ul>
+<aside class="notes">
+<p>Emphasize feeling: no SSHing around fixing things. Compare to
+traditional install → configure → drift. Here: build → boot →
+replace.</p>
+</aside>
+</section>
+<section id="what-is" class="slide level1">
+<h1>What is</h1>
+<p><img data-src="images/kairos-logo.png" /></p>
+<ul>
+<li>Open-source toolkit</li>
+<li>Not a traditional distro</li>
+<li>Turns Linux into an immutable system</li>
+<li>Focused on Kubernetes lifecycle</li>
+</ul>
+<aside class="notes">
+<p>Important: abstraction layer above distro. Not “yet another OS”, but
+a way to build one.</p>
+</aside>
+</section>
+<section id="ive-heard-this-before" class="slide level1">
+<h1>I’ve heard this before?</h1>
+<ul>
+<li>Image-based systems</li>
+<li>Declarative configuration</li>
+<li>Replace instead of patch</li>
+</ul>
+<p><img data-src="images/cat-compartments.jpg" class="right"
+style="width:60.0%" /></p>
+<aside class="notes">
+<p>This triggered memory of earlier lab. Transition into rewind.</p>
+</aside>
+</section>
+<section id="rewind-config-management-camp-2024" class="slide level1">
+<h1>Rewind: Config Management Camp 2024</h1>
+<p><img data-src="images/flatcar-logo.png" /></p>
+<ul>
+<li>Built and booted the OS</li>
+<li>Extended with <code>systemd-sysext</code></li>
+<li>Swapped Docker → Podman</li>
+<li>Very container-focused</li>
+</ul>
+<aside class="notes">
+<p>More hands-on OS work. Felt like building a container host.</p>
+</aside>
+</section>
+<section id="zooming-out-immutable-linux" class="slide level1">
+<h1>Zooming out: Immutable Linux</h1>
+<ul>
+<li><p>OS should be reproducible</p></li>
+<li><p>Reduce configuration drift</p></li>
+<li><p>Updates should be atomic</p></li>
+<li><p>Extend instead of mutate</p></li>
+<li><p>Read-only root filesystem</p></li>
+<li><p>Updates via images or snapshots</p></li>
+<li><p>Config separated from OS</p></li>
+<li><p>Replace instead of patch</p></li>
+</ul>
+<aside class="notes">
+<p>Important clarification: not literally immutable. It means controlled
+and predictable change. Still had SSH and imperative steps. Not fully
+“OS as artifact” yet.</p>
+</aside>
+</section>
+<section id="short-history" class="slide level1">
+<h1>Short history</h1>
+<ul>
+<li>2013: CoreOS</li>
+<li>Container-native OS model</li>
+<li>Automatic updates + rollback</li>
+<li>Later:
+<ul>
+<li>Red Hat CoreOS</li>
+<li>Fedora Atomic</li>
+</ul></li>
+</ul>
+<p><img data-src="images/project-atomic.png" /></p>
+<aside class="notes">
+<p>CoreOS popularized this approach. Not new — but now widespread.
+2013–2020: immutable distros 2020–2024: ecosystem diversification 2024–
+→ immutable toolchains &amp; pipelines</p>
+</aside>
+</section>
+<section id="the-ecosystem-today" class="slide level1">
+<h1>The ecosystem today</h1>
+<ul>
+<li>Flatcar (Container Linux)</li>
+<li>Bottlerocket</li>
+<li>openSUSE MicroOS</li>
+<li>Talos Linux</li>
+<li>Fedora Core OS (Atomic)</li>
+</ul>
+<aside class="notes">
+<p>Many implementations of same idea. Different tradeoffs. - A/B
+partition updates - Snapshot-based systems - OSTree-style systems -
+Container-image-based OS No single “correct” approach. Explains
+ecosystem diversity.</p>
+</aside>
+</section>
+<section id="not-truly-immutable" class="slide level1">
+<h1>Not truly immutable</h1>
+<ul>
+<li>Systems still change</li>
+<li>Logs, state, config are writable</li>
+<li>Some runtime changes allowed</li>
+</ul>
+<aside class="notes">
+<p>control change, don’t eliminate it Important insight from the field.
+Linux was never designed to be immutable.</p>
+</aside>
+</section>
+<section id="late-2024-bootc" class="slide level1">
+<h1>Late 2024: bootc</h1>
+<ul>
+<li>OS delivered as container images</li>
+<li>Built with familiar tools</li>
+<li>Aligns OS with app pipelines</li>
+</ul>
+<aside class="notes">
+<p>This is a major shift. Bridge between containers and OS.</p>
+</aside>
+</section>
+<section id="back-to-2026-kairos" class="slide level1">
+<h1>Back to 2026: Kairos</h1>
+<ul>
+<li>Now it makes more sense</li>
+<li>Builds on everything before it</li>
+<li>Works across distros</li>
+<li>OS defined in Dockerfile</li>
+<li>Built for lifecycle management</li>
+<li>Focus on clusters, not just nodes</li>
+</ul>
+<aside class="notes">
+<p>Others = distro Kairos = platform/toolkit</p>
+</aside>
+</section>
+<section id="how-it-works" class="slide level1">
+<h1>How it works</h1>
+<ul>
+<li>Build OS as image</li>
+<li>Deploy to nodes</li>
+<li>A/B partition updates</li>
+<li>Reboot and switch</li>
+</ul>
+<aside class="notes">
+<p>Same mental model as containers. What is mutable - Config and state
+only - OS replaced on update - Runtime changes discouraged</p>
+<p>Forces discipline. Prevents snowflake systems. - New image deployed -
+Files replaced entirely - Services restart cleanly - Rollback if
+needed</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="compared-to-talos">Compared to Talos</h2>
+<ul>
+<li>Talos:
+<ul>
+<li>No shell</li>
+<li>API-driven</li>
+</ul></li>
+<li>Kairos:
+<ul>
+<li>More flexible</li>
+<li>Closer to traditional Linux</li>
+</ul></li>
+</ul>
+<h2 id="compared-to-flatcar-etc.">Compared to Flatcar etc.</h2>
+<ul>
+<li>Flatcar:
+<ul>
+<li>Fixed distro</li>
+</ul></li>
+<li>bootc:
+<ul>
+<li>Building block</li>
+</ul></li>
+<li>Kairos:
+<ul>
+<li>Full lifecycle approach</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Talos is more opinionated. Kairos gives more control.</p>
+</aside>
+</section>
+<section id="state-of-immutable-linux" class="slide level1">
+<h1>State of immutable Linux</h1>
+<ul>
+<li><p>Not one standard approach</p></li>
+<li><p>Many competing models</p></li>
+<li><p>Focus shifting to lifecycle</p></li>
+<li><p>New operating systems:</p>
+<ul>
+<li>disposable</li>
+<li>reproducible</li>
+<li>part of CI/CD</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>immutability = managing change Leave audience with this idea.</p>
+</aside>
+</section>
+<section id="questions" class="slide level1">
+<h1>Questions</h1>
+<p>Thanks!</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
